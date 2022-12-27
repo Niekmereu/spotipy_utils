@@ -1,6 +1,8 @@
 import spotipy
 import random
 
+from dotenv import load_dotenv
+
 import spotipy.util as util
 
 PLAYLIST_SHUFFLE_NAME = "Value Snow Days Shuffle"
@@ -8,6 +10,8 @@ USERNAME = "11102391517"
 PLAYLIST_ID_ORIG = "2lA7j4O7OIMOCcq1C3e0a6"
 PLAYLIST_ID_SHUFFLE = "2plQd74hlompIF1g1HzerU"
 SCOPE = "playlist-modify-private"
+
+load_dotenv()
 
 token = util.prompt_for_user_token(USERNAME, scope=SCOPE)
 sp = spotipy.Spotify(auth=token)
