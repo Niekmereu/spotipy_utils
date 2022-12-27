@@ -1,0 +1,17 @@
+name: spotipy-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.7,<3.9
+  - pip==21.3.1
+  - notebook
+  - ipywidgets
+  - pandas==1.5.1
+  - numpy
+  - matplotlib==3.6.1
+  - scikit-learn==1.1.2
+  - spotipy
+  - python-dotenv
+  - pip:
+      - -r requirements.txt
