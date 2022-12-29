@@ -1,3 +1,6 @@
+import streamlit as st
+import pandas as pd
+import numpy as np
 import spotipy
 import random
 
@@ -14,6 +17,7 @@ load_dotenv()
 
 token = util.prompt_for_user_token(USERNAME, scope=SCOPE)
 sp = spotipy.Spotify(auth=token)
+st.title("Shuffle our playlist!")
 
 def get_playlist_tracks(username: str, playlist_id: str):
     """
@@ -65,4 +69,5 @@ def main():
         song_ids = song_ids[100:]
 
 if __name__ == "__main__":
-    main()
+    # main()
+    st.button("shuffle", on_click=main())
