@@ -3,4 +3,5 @@
   python-dotenv
   pandas
   streamlit
+  spotipy
   click==8.0
