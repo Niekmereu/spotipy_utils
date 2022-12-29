@@ -12,12 +12,20 @@ USERNAME = "11102391517"
 PLAYLIST_ID_ORIG = "2lA7j4O7OIMOCcq1C3e0a6"
 PLAYLIST_ID_SHUFFLE = "2plQd74hlompIF1g1HzerU"
 SCOPE = "playlist-modify-private"
+CLIENT_ID = "715976a18ab549dcb52d628f3afe9a38"
+CLIENT_SECRET = "4ad02e6dddfe4f789996f8f8104b4a0d"
+REDIRECT_URI = "http://127.0.0.1:9090"
 
-load_dotenv()
+# load_dotenv()
 
-token = util.prompt_for_user_token(USERNAME, scope=SCOPE)
-sp = spotipy.Spotify(auth=token)
+# token = util.prompt_for_user_token(USERNAME, scope=SCOPE)
+# sp = spotipy.Spotify(auth=token)
 st.title("Shuffle our playlist!")
+
+from spotipy import SpotifyOAuth
+
+creds = SpotifyOAuth(scope=SCOPE, client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri=REDIRECT_URI)
+sp = spotipy.Spotify(auth_manager=creds)
 
 def get_playlist_tracks(username: str, playlist_id: str):
     """
