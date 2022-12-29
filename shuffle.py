@@ -14,7 +14,7 @@ PLAYLIST_ID_SHUFFLE = "2plQd74hlompIF1g1HzerU"
 SCOPE = "playlist-modify-private"
 CLIENT_ID = "715976a18ab549dcb52d628f3afe9a38"
 CLIENT_SECRET = "4ad02e6dddfe4f789996f8f8104b4a0d"
-REDIRECT_URI = "http://127.0.0.1:9090"
+REDIRECT_URI = "https://spotipy-shuffler.herokuapp.com/oauth"
 
 # load_dotenv()
 
