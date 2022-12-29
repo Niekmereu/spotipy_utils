@@ -1,10 +1,11 @@
 import spotipy
 import random
 import os
-
+import json
 
 from dotenv import load_dotenv
 from spotipy.oauth2 import SpotifyOAuth
+from spotipy import MemoryCacheHandler
 
 import spotipy.util as util
 import streamlit as st
@@ -19,11 +20,22 @@ load_dotenv()
 CLIENT_ID = os.environ["SPOTIPY_CLIENT_ID"]
 CLIENT_SECRET = os.environ["SPOTIPY_CLIENT_SECRET"]
 REDIRECT_URI = os.environ["SPOTIPY_REDIRECT_URI"]
+TOKEN_INFO = os.environ["TOKEN_INFO"]
+TOKEN_INFO = eval(TOKEN_INFO)
 
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
-                                               client_secret=CLIENT_SECRET,
-                                               redirect_uri=REDIRECT_URI,
-                                               scope=SCOPE))
+token = SpotifyOAuth(
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_SECRET,
+        redirect_uri=REDIRECT_URI,
+        scope=SCOPE,
+        show_dialog=False, 
+        cache_handler=MemoryCacheHandler(token_info=TOKEN_INFO)
+    )
+
+
+sp = spotipy.Spotify(
+    auth_manager=token
+)
 
 # token = util.prompt_for_user_token(USERNAME, scope=SCOPE)
 # sp = spotipy.Spotify(auth=token)
