@@ -1,11 +1,13 @@
-import streamlit as st
-
 import spotipy
 import random
+import os
+
 
 from dotenv import load_dotenv
+from spotipy.oauth2 import SpotifyOAuth
 
 import spotipy.util as util
+import streamlit as st
 
 USERNAME = "11102391517"
 PLAYLIST_ID_ORIG = "2lA7j4O7OIMOCcq1C3e0a6"
@@ -14,8 +16,17 @@ SCOPE = "playlist-modify-private"
 
 load_dotenv()
 
-token = util.prompt_for_user_token(USERNAME, scope=SCOPE)
-sp = spotipy.Spotify(auth=token)
+CLIENT_ID = os.environ["SPOTIPY_CLIENT_ID"]
+CLIENT_SECRET = os.environ["SPOTIPY_CLIENT_SECRET"]
+REDIRECT_URI = os.environ["SPOTIPY_REDIRECT_URI"]
+
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
+                                               client_secret=CLIENT_SECRET,
+                                               redirect_uri=REDIRECT_URI,
+                                               scope=SCOPE))
+
+# token = util.prompt_for_user_token(USERNAME, scope=SCOPE)
+# sp = spotipy.Spotify(auth=token)
 st.title("Spotify shuffler!")
 
 
