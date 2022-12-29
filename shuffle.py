@@ -68,6 +68,6 @@ def main():
         )
         song_ids = song_ids[100:]
 
-if __name__ == "__main__":
-    # main()
-    st.button("shuffle", on_click=main())
+
+
+st.button("shuffle", on_click=main())
