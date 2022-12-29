@@ -1,6 +1,5 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
+
 import spotipy
 import random
 
@@ -18,14 +17,14 @@ REDIRECT_URI = "https://spotipy-shuffler.herokuapp.com/oauth"
 
 # load_dotenv()
 
-# token = util.prompt_for_user_token(USERNAME, scope=SCOPE)
-# sp = spotipy.Spotify(auth=token)
+token = util.prompt_for_user_token(USERNAME, scope=SCOPE)
+sp = spotipy.Spotify(auth=token)
 st.title("Shuffle our playlist!")
 
 from spotipy import SpotifyOAuth
 
-creds = SpotifyOAuth(scope=SCOPE, client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri=REDIRECT_URI)
-sp = spotipy.Spotify(auth_manager=creds)
+# creds = SpotifyOAuth(scope=SCOPE, client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri=REDIRECT_URI)
+#sp = spotipy.Spotify(auth_manager=creds)
 
 def get_playlist_tracks(username: str, playlist_id: str):
     """
