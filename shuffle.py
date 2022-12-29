@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 import spotipy.util as util
 
-PLAYLIST_SHUFFLE_NAME = "Value Snow Days Shuffle"
 USERNAME = "11102391517"
 PLAYLIST_ID_ORIG = "2lA7j4O7OIMOCcq1C3e0a6"
 PLAYLIST_ID_SHUFFLE = "2plQd74hlompIF1g1HzerU"
@@ -17,9 +16,17 @@ token = util.prompt_for_user_token(USERNAME, scope=SCOPE)
 sp = spotipy.Spotify(auth=token)
 
 def get_playlist_tracks(username: str, playlist_id: str):
-    # get all tracks belonigng to certain playlist
-    
-    results = sp.user_playlist_tracks(username,playlist_id)
+    """
+    Get all tracks belonging to a specific playlist.
+
+    Parameters
+    ----------
+    username: str
+        the id of the user
+    playlist_id: str
+        the id of the playlist
+    """
+    results = sp.user_playlist_tracks(username, playlist_id)
     tracks = results['items']
     while results['next']:
         results = sp.next(results)
@@ -30,10 +37,11 @@ def get_playlist_tracks(username: str, playlist_id: str):
 
 def main():
 
-    # get shuffled tracks and clean shuffled playlist
+    # get shuffled tracks
     playlist_shuffled = get_playlist_tracks(USERNAME, PLAYLIST_ID_SHUFFLE)
     song_ids_shuffled = [song.get("track").get("id") for song in playlist_shuffled]
 
+    # remove all songs from shuffled playlist
     while song_ids_shuffled:
         results = sp.user_playlist_remove_all_occurrences_of_tracks(
             USERNAME, PLAYLIST_ID_SHUFFLE, song_ids_shuffled[:100]
